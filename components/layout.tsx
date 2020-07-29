@@ -4,7 +4,10 @@ import Link from 'next/link'
 const name = 'Oshimani'
 export const siteTitle = `Oshimani's Next.js Sample Website`
 
-export default function Layout({ children, home }) {
+import React from 'react'
+
+// Layout component
+export default (props: { children, home?: boolean }) => {
   return (
     <div className="container max-w-xl px-0 py-4 mx-auto mt-12 mb-24">
 
@@ -27,14 +30,14 @@ export default function Layout({ children, home }) {
       <header className={"flex flex-col items-center"}>
 
         {/* Is home page?  */}
-        {home ? (
+        {props.home ? (
           <>
             <img
               src="/images/profile.png"
               className={`w-32 h-32 rounded shadow-lg mb-4`}
               alt={name}
             />
-                  <h1 className={`shadow-lg rounded text-white bg-teal-500 px-4 py-2 mb-4 font-bold text-4xl`}>{name}</h1>
+            <h1 className={`shadow-lg rounded text-white bg-teal-500 px-4 py-2 mb-4 font-bold text-4xl`}>{name}</h1>
           </>
 
           // Is not home page
@@ -59,13 +62,13 @@ export default function Layout({ children, home }) {
       </header>
 
       {/* Pages will be injected here */}
-      <main>{children}</main>
+      <main>{props.children}</main>
 
       {/* Footer adds back button if not on home page */}
-      {!home && (
+      {!props.home && (
         <div className="mt-12">
           <Link href="/">
-            <a>🏠 ← 🏃 </a>
+            <a>🏠 ← 🏃</a>
           </Link>
         </div>
       )}
